@@ -82,7 +82,7 @@ public class MapGenerator : MonoBehaviour {
 		float[,] finalNoise = new float[mapWidth, mapHeight];
 		float[,] filtreBorder = new float[mapWidth, mapHeight];
 		float[,] filtreCentre = new float[mapWidth, mapHeight];
-
+		/*
 		//init filtre border
 		for(int i = 0; i < this.settingsFiltre.Length; i++)
         {
@@ -93,7 +93,7 @@ public class MapGenerator : MonoBehaviour {
 					
 				}
 			}
-		}
+		}*/
 
 		//application des filtres
 		for (int y = 0; y < mapHeight; y++)
@@ -104,7 +104,7 @@ public class MapGenerator : MonoBehaviour {
 			}
 		}
 
-		return finalNoise;
+		return noiseMap;
     }
 
 	public Position getPostion(float[,] noiseMap, int x, int y, float h)
