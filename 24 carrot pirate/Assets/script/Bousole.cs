@@ -8,19 +8,27 @@ public class Bousole : MonoBehaviour
     [SerializeField] private Transform attache;
     [SerializeField] private Transform aiguille;
 
+    [Range(1, 4)]
+    [SerializeField] private float distance;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float move = 0;
 
     // Update is called once per frame
     void Update()
     {
         this.transform.position = attache.position;
+        MouveDistance();
+    }
 
+    private void rotationAiguille()
+    {
+        
+    }
 
-
+    private void MouveDistance()
+    {
+        move = (move + (Time.deltaTime * distance)) % 2;
+        aiguille.position = new Vector3(0, 4 + move , 0);
+        
     }
 }
