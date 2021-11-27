@@ -48,7 +48,6 @@ public class QueueToufue : MonoBehaviour {
         }
         
        
-
         if (x < 0)
         {
             Vector3 spriteScale = this.transform.GetChild(0).localScale;

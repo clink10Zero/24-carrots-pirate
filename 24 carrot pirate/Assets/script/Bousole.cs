@@ -7,28 +7,34 @@ public class Bousole : MonoBehaviour
 
     [SerializeField] private Transform attache;
     [SerializeField] private Transform aiguille;
+    [SerializeField] private Transform target;
 
-    [Range(1, 4)]
     [SerializeField] private float distance;
-
     private float move = 0;
 
-    // Update is called once per frame
     void Update()
     {
         this.transform.position = attache.position;
-        MouveDistance();
+        Vector3 relativePos = this.transform.position - this.target.position;
+        rotationAiguille(relativePos);
+        MouveDistance(relativePos.magnitude);
     }
 
-    private void rotationAiguille()
+    private void rotationAiguille(Vector3 relativePos)
     {
-        
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.forward);
+
+        this.transform.rotation = rotation;
     }
 
-    private void MouveDistance()
+    private void MouveDistance(float distanceToTarget)
     {
+        float pourcent = 0;
+        if (distanceToTarget < 1000)
+            pourcent = distanceToTarget - 1000;
+        distance = 4 - (1 + (3 * pourcent));
         move = (move + (Time.deltaTime * distance)) % 2;
-        aiguille.position = new Vector3(0, 4 + move , 0);
+        aiguille.localPosition = new Vector3(0, 4 + move , 0);
         
     }
 }
