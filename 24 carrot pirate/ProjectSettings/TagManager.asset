@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boat
+  - Enemy
+  - QT
+  - Boss
   layers:
   - Default
   - TransparentFX

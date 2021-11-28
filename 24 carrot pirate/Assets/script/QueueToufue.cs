@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using  UnityEngine.SceneManagement;
 
 public class QueueToufue : MonoBehaviour {
 
@@ -15,18 +16,51 @@ public class QueueToufue : MonoBehaviour {
 
     [SerializeField] private float jumpHight = 1000f;
     private int jumpCount;
-
+    public GameObject canvas;
+    public GameObject canvasWin;
 
     // Start is called before the first frame update
     void Start()
     {
+        canvas.SetActive(false);
+        canvasWin.SetActive(false);
+        Time.timeScale = 1;
         jumpCount = 0;
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+
+        if (collision.gameObject.tag.Equals("Boss"))
+        {
+            
+            canvasWin.SetActive(true);
+            Time.timeScale = 0;
+        }
+        if (collision.gameObject.tag.Equals("Enemy"))
+        {
+            GetComponent<Collider2D>().enabled = false;
+            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipY = true;
+            this.GetComponent<Collider2D>().enabled = false;
+            Vector3 movement = new Vector3(Random.Range(40, 70), Random.Range(40, 40), 0f);
+            this.transform.position = this.transform.position + movement * Time.deltaTime;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-       
+
+        if (this.transform.position.y < -3)
+        {
+
+
+
+            canvas.SetActive(true);
+            Time.timeScale = 0;
+        }
+
         float x = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
@@ -83,5 +117,17 @@ public class QueueToufue : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public void restar() {
+        
+        Time.timeScale =1;
+        SceneManager.LoadScene("Niveau");
+    }
+
+    public void backMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Titre");
     }
 }

@@ -13,13 +13,14 @@ public class CochconosMove : MonoBehaviour
     public SpriteRenderer graphics;
     public Transform scale;
     private float flip;
+    
     // Start is called before the first frame update
     void Start()
     {
        flip =  transform.localScale.x;
       
     }
-
+     
     // Update is called once per frame 
     void Update()
     {
@@ -51,6 +52,12 @@ public class CochconosMove : MonoBehaviour
             {
                 indexPoint++;
             }
+        }
+
+        if(this.transform.GetChild(0).position.y< -15)
+        {
+            
+            Destroy(this.gameObject);
         }
     }
 
