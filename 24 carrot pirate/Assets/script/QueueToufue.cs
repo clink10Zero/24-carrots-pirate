@@ -29,28 +29,22 @@ public class QueueToufue : MonoBehaviour {
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    
 
 
-        if (collision.gameObject.tag.Equals("Boss"))
-        {
-            
-            canvasWin.SetActive(true);
-            Time.timeScale = 0;
-        }
-        if (collision.gameObject.tag.Equals("Enemy"))
-        {
-            GetComponent<Collider2D>().enabled = false;
-            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipY = true;
-            this.GetComponent<Collider2D>().enabled = false;
-            Vector3 movement = new Vector3(Random.Range(40, 70), Random.Range(40, 40), 0f);
-            this.transform.position = this.transform.position + movement * Time.deltaTime;
-        }
-    }
+        
+    
+       
     // Update is called once per frame
     void Update()
     {
+
+        if (this.transform.position.x >167.9)
+        {
+
+            canvasWin.SetActive(true);
+            Time.timeScale = 0;
+        }
 
         if (this.transform.position.y < -3)
         {
